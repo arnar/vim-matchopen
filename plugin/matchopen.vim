@@ -35,10 +35,17 @@ function! s:Highlight_Last_Open()
 
   let stopline = line('w0')
 
-  let [m_lnum, m_col] = searchpairpos('(', '', ')', 'nbW', s_skip, stopline)
+  let hl_pattern = ''
 
-  if m_lnum > 0 && m_lnum >= stopline
-    exe '2match MatchParen /\%' . m_lnum . 'l\%' . m_col . 'c/'
+  for [p_open, p_close] in [['(',')'], ['{','}'], ['\[', '\]']]
+      let [m_lnum, m_col] = searchpairpos(p_open, '', p_close, 'nbW', s_skip, stopline)
+      if m_lnum > 0 && m_lnum >= stopline
+        let hl_pattern = hl_pattern . '\%' . m_lnum . 'l\%' . m_col . 'c\|'
+      endif
+  endfor
+
+  if !empty(hl_pattern)
+    exe '2match MatchParen /' . hl_pattern[:-3] . '/'
     let w:lastpar_hl_on = 1
   endif
 endfunction
