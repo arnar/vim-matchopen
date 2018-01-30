@@ -16,6 +16,10 @@ if exists("*s:Highlight_Last_Open")
   finish
 endif
 
+if !hlexists("MatchOpen")
+  highlight link MatchOpen MatchParen
+endif
+
 let s:cpo_save = &cpo
 set cpo-=C
 
@@ -45,7 +49,7 @@ function! s:Highlight_Last_Open()
   endfor
 
   if !empty(hl_pattern)
-    exe '2match MatchParen /' . hl_pattern[:-3] . '/'
+    exe '2match MatchOpen /' . hl_pattern[:-3] . '/'
     let w:lastpar_hl_on = 1
   endif
 endfunction

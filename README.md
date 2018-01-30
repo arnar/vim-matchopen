@@ -10,6 +10,12 @@ Example:
                    |            if cursor is here
                    this is highlighted
 
+By default the delimiters are highlighted the same as vim highlights matching
+parentheses. To change this, set the `MatchOpen` highlight group in your
+`.vimrc`. E.g.:
+
+    hi link MatchOpen Error
+
 Note: This is a preliminary version for testing. Only works for regular
 parenthesis and has no documentation.
 
