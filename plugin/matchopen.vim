@@ -1,7 +1,7 @@
 " Vim plugin for highlighting the opening delimiter of the scope
 " that the cursor is in. Based on matchparen.vim.
 " Maintainer: Arnar Birgisson <arnarbi@gmail.com>
-" Last Change: 2012 Sep 11
+" Last Change: 2019 Oct 10
 
 if exists("g:loaded_matchopen") || &cp || !exists("##CursorMoved")
   finish
@@ -35,7 +35,6 @@ function! s:Highlight_Last_Open()
 
   let s_skip ='synIDattr(synID(line("."), col("."), 0), "name") ' .
         \ '=~?  "string\\|character\\|singlequote\\|escape\\|comment"'
-  execute 'if' s_skip '| let s_skip = 0 | endif'
 
   let stopline = line('w0')
 
